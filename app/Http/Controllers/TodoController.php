@@ -24,4 +24,22 @@ class TodoController extends Controller
         return redirect()->back();
 
     }
+
+    public function edit($id)
+    {
+        // return $id;
+        $todo = Todo::findOrFail($id);
+
+        return view('pages.todo.edit', compact('todo'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // return $request->all();
+        $todo = Todo::findOrFail($id);
+        $todo->task = $request->get('task');
+        $todo->update();
+
+        return redirect()->route('todo.index');
+    }
 }

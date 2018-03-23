@@ -8,12 +8,12 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <form action="{{ route('todo.store') }}" method="post">
+        <form action="{{ route('todo.store') }}" method="POST">
             {{ csrf_field() }}
             <div class="input-group">
                 <input type="text" name="task" class="form-control" placeholder="Cooking pie with cream">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Submit!</button>
+                    <button class="btn btn-default" type="submit">Submit!</button>
                 </span>
             </div>
             <!-- /input-group -->
@@ -46,7 +46,7 @@
                                 <td>{{ $todo->task }}</td>
                                 <td>
                                     @if ($todo->status == 0)
-                                        <a href="{{ route('todo.edit') }}" class="btn btn-info btn-xs">
+                                        <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-info btn-xs">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
                                         </a>
                                         <button type="button" class="btn btn-danger btn-xs">

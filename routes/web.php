@@ -17,7 +17,5 @@ Route::get('/', function () {
 
 Route::get('/todo', 'TodoController@index')->name('todo.index');
 Route::post('/todo', 'TodoController@store')->name('todo.store');
-
-Route::get('/edit', function () {
-    return view('pages.todo.edit');
-})->name('todo.edit');
+Route::get('/todo/{id}/edit', 'TodoController@edit')->name('todo.edit');
+Route::put('/todo/{id}', 'TodoController@update')->name('todo.update');
