@@ -51,4 +51,13 @@ class TodoController extends Controller
 
         return redirect()->route('todo.index');
     }
+
+    public function complete(Request $request, $id)
+    {
+        $todo = Todo::findOrFail($id);
+        $todo->status = true;
+        $todo->update();
+
+        return redirect()->route('todo.index');
+    }
 }

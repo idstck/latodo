@@ -56,13 +56,20 @@
                                             >
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
                                             </a>
-                                            <button type="button" class="btn btn-success btn-xs">
+                                            <a 
+                                                href="{{ route('todo.complete', $todo->id) }}" 
+                                                class="btn btn-success btn-xs"
+                                                onclick="event.preventDefault(); document.getElementById('complete-form-{{ $todo->id }}').submit();"
+                                            >
                                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark as Complete!
-                                            </button>
+                                            </a>
 
                                             <form id="delete-form-{{ $todo->id }}" action="{{ route('todo.delete', $todo->id) }}" method="POST" style="display: none;">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="_method" value="DELETE">
+                                            </form>
+                                            <form id="complete-form-{{ $todo->id }}" action="{{ route('todo.complete', $todo->id) }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
                                             </form>
                                         @else
                                         <span class="badge">Complete</span>
