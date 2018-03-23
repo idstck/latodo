@@ -21,12 +21,12 @@
     </div>
     <!-- /.col-lg-6 -->
     <div class="col-lg-6">
-        <div class="input-group">
-            <div class="alert alert-success" role="alert" style="padding-bottom: 12px;padding-top: 11px;">
-                Your todo update successfully
+        @if (Session::has('success'))
+            <div class="alert alert-success alert-dismissible" style="padding-bottom: 12px;padding-top: 11px;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> {{ Session::get('success') }}
             </div>
-        </div>
-        <!-- /input-group -->
+        @endif
     </div>
     <!-- /.col-lg-6 -->
 </div>
