@@ -8,13 +8,16 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cooking pie with cream">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Submit!</button>
-            </span>
-        </div>
-        <!-- /input-group -->
+        <form action="{{ route('todo.store') }}" method="post">
+            {{ csrf_field() }}
+            <div class="input-group">
+                <input type="text" name="task" class="form-control" placeholder="Cooking pie with cream">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Submit!</button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </form>
     </div>
     <!-- /.col-lg-6 -->
     <div class="col-lg-6">
@@ -38,26 +41,26 @@
                 <table class="table table-striped">
                     <thead></thead>
                     <tbody>
-                        <tr>
-                            <td>John</td>
-                            <td>
-                                <a href="{{ route('todo.edit') }}" class="btn btn-info btn-xs">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-                                </a>
-                                <button type="button" class="btn btn-danger btn-xs">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
-                                </button>
-                                <button type="button" class="btn btn-success btn-xs">
-                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark as Complete!
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Mary</td>
-                            <td>
-                                <span class="badge">Complete</span>
-                            </td>
-                        </tr>
+                        @foreach ($todos as $todo)
+                            <tr>
+                                <td>{{ $todo->task }}</td>
+                                <td>
+                                    @if ($todo->status == 0)
+                                        <a href="{{ route('todo.edit') }}" class="btn btn-info btn-xs">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                                        </a>
+                                        <button type="button" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
+                                        </button>
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark as Complete!
+                                        </button>
+                                        @else
+                                        <span class="badge">Complete</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
