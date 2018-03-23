@@ -46,15 +46,24 @@
                                 <td>{{ $todo->task }}</td>
                                 <td>
                                     @if ($todo->status == 0)
-                                        <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-info btn-xs">
-                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
-                                        </a>
-                                        <button type="button" class="btn btn-danger btn-xs">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
-                                        </button>
-                                        <button type="button" class="btn btn-success btn-xs">
-                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark as Complete!
-                                        </button>
+                                            <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-info btn-xs">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
+                                            </a>
+                                            <a 
+                                                href="{{ route('todo.delete', $todo->id) }}" 
+                                                class="btn btn-danger btn-xs" 
+                                                onclick="event.preventDefault(); document.getElementById('delete-form-{{ $todo->id }}').submit();"
+                                            >
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete
+                                            </a>
+                                            <button type="button" class="btn btn-success btn-xs">
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Mark as Complete!
+                                            </button>
+
+                                            <form id="delete-form-{{ $todo->id }}" action="{{ route('todo.delete', $todo->id) }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE">
+                                            </form>
                                         @else
                                         <span class="badge">Complete</span>
                                     @endif
